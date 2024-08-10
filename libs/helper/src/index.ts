@@ -1,6 +1,8 @@
-
 // Database
-export * from "./database/database.service";
+export * from './database/database.service';
 
 // Helpers
-export * from "./helpers/password.helper";
+export * from './helpers/password.helper';
+
+// Filters
+export * from './filters/baseException.filter';
