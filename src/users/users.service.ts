@@ -29,7 +29,7 @@ export class UsersService {
     const user = await this.usersRepository.preload({
       id: id,
       ...updateUserDto,
-    });
+    })
     if (!user) {
       throw new Error(`User with id ${id} not found`);
     }

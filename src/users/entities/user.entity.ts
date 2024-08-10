@@ -39,7 +39,7 @@ export class User {
   @BeforeInsert()
   @BeforeUpdate()
   encryptPassword() {
-    if (!isPassEncrypted(this.password)) {
+    if (this.password && !isPassEncrypted(this.password)) {
       this.password = encryptPassword(this.password);
     }
   }
