@@ -1,9 +1,9 @@
+import { connectionOptions } from '@app/helper';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { number, object, string } from 'joi';
-import { connectionOptions } from '../libs/helper/src';
+import * as Joi from 'joi';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UrlsModule } from './urls/urls.module';
@@ -15,15 +15,13 @@ import { UsersModule } from './users/users.module';
     UrlsModule,
     ConfigModule.forRoot({
       isGlobal: true,
-      validationSchema: object({
-        JWT_SECRET: string().required(),
-        JWT_EXPIRATION: string().required(),
-        ENVIRONMENT: string().required(),
-        DATABASE_PORT: number().required(),
-        POSTGRES_HOST: string().required(),
-        POSTGRES_PASSWORD: string().required(),
-        POSTGRES_USER: string().required(),
-        POSTGRES_DB: string().required(),
+      validationSchema: Joi.object({
+        ENVIRONMENT: Joi.string().required(),
+        DATABASE_PORT: Joi.number().required(),
+        POSTGRES_HOST: Joi.string().required(),
+        POSTGRES_PASSWORD: Joi.string().required(),
+        POSTGRES_USER: Joi.string().required(),
+        POSTGRES_DB: Joi.string().required(),
       }),
       envFilePath: '.env',
     }),
@@ -33,4 +31,4 @@ import { UsersModule } from './users/users.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

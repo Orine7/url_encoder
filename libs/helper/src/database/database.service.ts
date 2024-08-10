@@ -14,7 +14,7 @@ const postgreConfig: PostgresConnectionOptions = {
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB,
   port: parseInt(process.env.DATABASE_PORT) || 5433,
-  entities: ['./src/**/*.entity{.ts,.js}'],
+  entities: ['.**/*.entity{.ts,.js}'],
   namingStrategy: new SnakeNamingStrategy(),
   synchronize: process.env.ENVIRONMENT !== 'PRODUCTION',
 };
@@ -35,7 +35,7 @@ export function connectionOptions(): TypeOrmModuleAsyncOptions {
         password: configService.get('POSTGRES_PASSWORD'),
         database: configService.get('POSTGRES_DB'),
         port: parseInt(configService.get('DATABASE_PORT')),
-        entities: ['./src/**/*.entity{.ts,.js}'],
+        entities: ['.**/*.entity{.ts,.js}'],
         namingStrategy: new SnakeNamingStrategy(),
         synchronize: configService.get('ENVIRONMENT') !== 'PRODUCTION',
       };
