@@ -9,3 +9,8 @@ export * from './filters/baseException.filter';
 
 // Types
 export * from './types/user.type';
+
+// Decorators
+export * from './decorators/currentUser.decorator';
+export * from './decorators/public.decorator';
+
