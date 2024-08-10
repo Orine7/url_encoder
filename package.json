@@ -1,6 +1,6 @@
 {
   "name": "url_encoder",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "This software shortens and encodes url from users.",
   "author": "Orine",
   "private": true,
