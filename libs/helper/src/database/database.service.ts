@@ -7,6 +7,7 @@ import { DataSource } from 'typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 
+//** Database Config. This database configuration serves only to migrations, seeds and things outside the application */
 const postgreConfig: PostgresConnectionOptions = {
   type: 'postgres',
   host: process.env.POSTGRES_HOST,
@@ -22,6 +23,7 @@ const postgresDS = new DataSource(postgreConfig);
 postgresDS.initialize();
 export default postgresDS;
 
+//** Database Config. This connection options will/should be run with TypeormAsync function */
 export function connectionOptions(): TypeOrmModuleAsyncOptions {
   return {
     imports: [ConfigModule],

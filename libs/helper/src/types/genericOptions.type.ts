@@ -7,16 +7,19 @@ export enum OrderEnum {
 }
 
 export class pageOptions {
+    //** Order of the results, generally used on createdAt. */
     @IsEnum(OrderEnum)
     @IsOptional()
     order?: OrderEnum = OrderEnum.ASC;
 
+    //** Page number. */
     @Type(() => Number)
     @IsInt()
     @Min(0)
     @IsOptional()
     page?: number = 0;
 
+    //** Number of results per page. */
     @Type(() => Number)
     @IsInt()
     @Min(1)

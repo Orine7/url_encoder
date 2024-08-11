@@ -8,12 +8,14 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { CurrentUser, JWTUser, Public } from '../../libs/helper/src';
 import { pageOptions } from '../../libs/helper/src/types/genericOptions.type';
 import { CreateUrlDto } from './dto/create-url.dto';
 import { UpdateUrlDto } from './dto/update-url.dto';
 import { UrlsService } from './urls.service';
 
+@ApiTags('urls')
 @Controller('urls')
 export class UrlsController {
   constructor(private readonly urlsService: UrlsService) { }
