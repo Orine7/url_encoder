@@ -10,6 +10,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { UrlAccess } from '../../urls/entities/access.entity';
 import { Url } from '../../urls/entities/url.entity';
 
 @Entity()
@@ -31,6 +32,9 @@ export class User {
 
   @OneToMany(() => Url, (url) => url.creator)
   urls?: Url[];
+
+  @OneToMany(() => UrlAccess, (url) => url.user)
+  accesses?: UrlAccess[];
 
   @CreateDateColumn()
   createdAt?: Date;

@@ -38,7 +38,7 @@ import { UsersModule } from './users/users.module';
         global: true,
         secret: configService.get<string>("JWT_SECRET"),
         signOptions: {
-          expiresIn: `60s`,
+          expiresIn: `60m`,
         },
       }),
       inject: [ConfigService],

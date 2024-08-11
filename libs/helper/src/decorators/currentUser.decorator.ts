@@ -1,14 +1,10 @@
 import { createParamDecorator, ExecutionContext } from "@nestjs/common";
+import { JWTUser } from "../types/jwtUser.type";
 
 export const getCurrentUserByContext = (
     context: ExecutionContext,
-) => {
-    if (context.getType() === "http") {
-        return context.switchToHttp().getRequest().user;
-    }
-    if (context.getType() === "rpc") {
-        return context.switchToRpc().getData().user;
-    }
+): JWTUser => {
+    return context.switchToHttp().getRequest().user
 };
 
 export const CurrentUser = createParamDecorator(

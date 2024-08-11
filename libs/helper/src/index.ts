@@ -8,6 +8,7 @@ export * from './helpers/password.helper';
 export * from './filters/baseException.filter';
 
 // Types
+export * from './types/jwtUser.type';
 export * from './types/user.type';
 
 // Decorators

@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { JWTUser } from '../libs/helper/src';
 import { User } from './users/entities/user.entity';
 
 @Injectable()
@@ -9,7 +10,12 @@ export class AppService {
     return 'Hello World!';
   }
   login(user: User) {
-    const payload = { name: user.name, id: user.id };
+    const payload: JWTUser = {
+      id: user.id,
+      email: user.email,
+      type: user.type,
+      name: user.name
+    }
     return {
       access_token: this.jwtService.sign(payload),
     };

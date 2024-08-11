@@ -14,6 +14,9 @@ export class Url {
     @Column()
     shortUrl: string;
 
+    @Column({ default: true, type: 'boolean' })
+    isPublic: boolean;
+
     @ManyToOne(() => User, (user) => user.urls)
     creator?: User;
 

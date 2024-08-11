@@ -1,4 +1,5 @@
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { User } from '../../users/entities/user.entity';
 import { Url } from './url.entity';
 
 @Entity()
@@ -10,13 +11,10 @@ export class UrlAccess {
     url: Url;
 
     @Column()
-    accessDate: Date;
-
-    @Column()
     ipAddress: string;
 
-    @Column()
-    user: string;
+    @ManyToOne(() => User, (user) => user.accesses)
+    user?: User;
 
     @CreateDateColumn()
     createdAt: Date;
