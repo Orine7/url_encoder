@@ -6,9 +6,11 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Url } from '../../urls/entities/url.entity';
 
 @Entity()
 export class User {
@@ -26,6 +28,9 @@ export class User {
 
   @Column({ enum: UserType, default: UserType.USER })
   type: string;
+
+  @OneToMany(() => Url, (url) => url.creator)
+  urls?: Url[];
 
   @CreateDateColumn()
   createdAt?: Date;

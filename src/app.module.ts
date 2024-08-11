@@ -9,6 +9,7 @@ import * as Joi from 'joi';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { JwtAuthGuard } from './guards/jwt.guard';
+import { JwtStrategy } from './strategies/jwt.strategy';
 import { LocalStrategy } from './strategies/local.strategy';
 import { UrlsModule } from './urls/urls.module';
 import { UsersModule } from './users/users.module';
@@ -44,7 +45,7 @@ import { UsersModule } from './users/users.module';
     })
   ],
   controllers: [AppController],
-  providers: [AppService, LocalStrategy, {
+  providers: [AppService, LocalStrategy, JwtStrategy, {
     provide: APP_GUARD,
     useClass: JwtAuthGuard,
   },],
