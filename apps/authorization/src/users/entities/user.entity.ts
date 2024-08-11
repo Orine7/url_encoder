@@ -10,8 +10,8 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { UrlAccess } from '../../urls/entities/access.entity';
-import { Url } from '../../urls/entities/url.entity';
+import { UrlAccess } from '../../../../url_shortner/src/entities/access.entity';
+import { Url } from '../../../../url_shortner/src/entities/url.entity';
 
 @Entity()
 export class User {

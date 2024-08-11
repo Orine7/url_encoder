@@ -1,4 +1,5 @@
 FROM node:22.4-alpine
+
 WORKDIR /usr/src
 
 COPY package*.json ./

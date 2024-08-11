@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
-import { User } from '../../users/entities/user.entity';
+import { User } from '../../../authorization/src/users/entities/user.entity';
 import { Url } from './url.entity';
 
 @Entity()

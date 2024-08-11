@@ -1,12 +1,15 @@
 services:
   auth_service:
-    build: .
+    build: 
+      context: ./apps/authorization
+      dockerfile: Dockerfile
     command: npm run start:debug
     ports:
       - 3000:3000
       - 9229:9229
     env_file:
-      - ./apps/.env
+      - .env
+      - ./apps/authorization/.env
     volumes:
       - .:/usr/src
       - /usr/src/node_modules
@@ -15,7 +18,7 @@ services:
   
   url_service:
     build: 
-      context: ./url_shortner
+      context: ./apps/url_shortner
       dockerfile: Dockerfile
 
     command: npm run start:debug
@@ -23,7 +26,7 @@ services:
       - 4000:3000
       - 9228:9229
     env_file:
-      - .env
+      - ./apps/url_shortner/.env
     volumes:
       - .:/usr/src
       - /usr/src/node_modules
@@ -37,5 +40,6 @@ services:
       - 5432:5432
     env_file:
       - .env
+      - ./apps/url_shortner/.env
     volumes:
      - "../data/:/var/lib/postgresql/data"

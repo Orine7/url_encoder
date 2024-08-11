@@ -5,12 +5,14 @@ import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as Joi from 'joi';
 import { connectionOptions } from '../../../libs/helper/src';
+import { UrlAccess } from './entities/access.entity';
+import { Url } from './entities/url.entity';
 import { UrlShortnerController } from './url_shortner.controller';
-import { UrlsModule } from './urls/urls.module';
+import { UrlShortnerService } from './url_shortner.service';
 
 @Module({
   imports: [
-    UrlsModule,
+
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: Joi.object({
@@ -35,9 +37,10 @@ import { UrlsModule } from './urls/urls.module';
         },
       }),
       inject: [ConfigService],
-    })
+    }),
+    TypeOrmModule.forFeature([Url, UrlAccess])
   ],
   controllers: [UrlShortnerController],
-  providers: [UrlShortnerController],
+  providers: [UrlShortnerService],
 })
 export class UrlShortnerModule { }

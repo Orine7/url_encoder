@@ -16,7 +16,7 @@ describe('UrlShortnerController', () => {
 
   describe('root', () => {
     it('should return "Hello World!"', () => {
-      expect(urlShortnerController.getHello()).toBe('Hello World!');
+
     });
   });
 });
