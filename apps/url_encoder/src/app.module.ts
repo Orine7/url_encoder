@@ -11,13 +11,11 @@ import { AppService } from './app.service';
 import { JwtAuthGuard } from './guards/jwt.guard';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { LocalStrategy } from './strategies/local.strategy';
-import { UrlsModule } from './urls/urls.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
     UsersModule,
-    UrlsModule,
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: Joi.object({

@@ -3,7 +3,7 @@
     "configurations": [
 
          {
-      "name": "Attach to UrlEncoder",
+      "name": "Attach to Authorization",
       "type": "node",
       "request": "attach",
       "port": 9229,

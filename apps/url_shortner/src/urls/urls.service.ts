@@ -1,13 +1,12 @@
+import { JWTUser, pageOptions } from '@app/helper';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { JWTUser } from '../../libs/helper/src';
-import { pageOptions } from '../../libs/helper/src/types/genericOptions.type';
-import { User } from '../users/entities/user.entity';
 import { CreateUrlDto } from './dto/create-url.dto';
 import { UpdateUrlDto } from './dto/update-url.dto';
 import { UrlAccess } from './entities/access.entity';
 import { Url } from './entities/url.entity';
+
 
 @Injectable()
 export class UrlsService {
@@ -17,13 +16,11 @@ export class UrlsService {
     private readonly urlRepository: Repository<Url>,
     @InjectRepository(UrlAccess)
     private readonly urlAccessRepository: Repository<UrlAccess>,
-    @InjectRepository(User)
-    private readonly userRepository: Repository<User>,
   ) { }
   async create(createUrlDto: CreateUrlDto, currentUser?: JWTUser) {
     const newUrl = this.urlRepository.create({
       ...createUrlDto,
-      creator: currentUser ? await this.userRepository.findOne({ where: { id: createUrlDto.userId } }) : undefined,
+      creator: currentUser ? currentUser.id : undefined,
       shortUrl: Math.random().toString(36).substring(2, 8),
     });
     return await this.urlRepository.save(newUrl);
@@ -64,7 +61,7 @@ export class UrlsService {
     const newAccess = this.urlAccessRepository.create({
       url,
       ipAddress: ip,
-      user: currentUser ? await this.userRepository.findOne({ where: { id: currentUser.id } }) : undefined,
+      user: currentUser ? currentUser.id : undefined,
     })
     return this.urlAccessRepository.save(newAccess);
   }
