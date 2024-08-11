@@ -6,7 +6,7 @@ services:
       - 3000:3000
       - 9229:9229
     env_file:
-      - .env
+      - ./apps/.env
     volumes:
       - .:/usr/src
       - /usr/src/node_modules
