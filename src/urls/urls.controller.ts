@@ -6,8 +6,10 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { CurrentUser, JWTUser, Public } from '../../libs/helper/src';
+import { pageOptions } from '../../libs/helper/src/types/genericOptions.type';
 import { CreateUrlDto } from './dto/create-url.dto';
 import { UpdateUrlDto } from './dto/update-url.dto';
 import { UrlsService } from './urls.service';
@@ -22,9 +24,13 @@ export class UrlsController {
     return this.urlsService.create(createUrlDto, user);
   }
 
+  @Public("readonly")
   @Get()
-  findAll() {
-    return this.urlsService.findAll();
+  findAll(
+    @Query() options: pageOptions,
+    @CurrentUser() user?: JWTUser
+  ) {
+    return this.urlsService.findAll(options, user);
   }
 
   @Get(':id')

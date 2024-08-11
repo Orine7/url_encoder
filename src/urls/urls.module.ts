@@ -10,5 +10,6 @@ import { UrlsService } from './urls.service';
   imports: [TypeOrmModule.forFeature([Url, UrlAccess, User])],
   controllers: [UrlsController],
   providers: [UrlsService],
+  exports: [UrlsService],
 })
 export class UrlsModule { }

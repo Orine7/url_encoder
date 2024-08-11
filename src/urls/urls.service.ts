@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { JWTUser } from '../../libs/helper/src';
+import { pageOptions } from '../../libs/helper/src/types/genericOptions.type';
 import { User } from '../users/entities/user.entity';
 import { CreateUrlDto } from './dto/create-url.dto';
 import { UpdateUrlDto } from './dto/update-url.dto';
@@ -28,12 +29,32 @@ export class UrlsService {
     return await this.urlRepository.save(newUrl);
   }
 
-  findAll() {
-    return `This action returns all urls`;
+  async findAll(options: pageOptions, currentUser?: JWTUser) {
+    const [urls, totalurls] = await this.urlRepository.findAndCount({
+      where: [
+        { isPublic: true, deletedAt: null },
+        {
+          creator: currentUser ? { id: currentUser.id } : undefined
+        }],
+      relations: {
+        accesses: true,
+        creator: true
+      },
+      order: {
+        createdAt: options.order
+      },
+      take: options.size,
+      skip: options.page * options.size
+    });
+    const urlCounts = urls.reduce((acc, url) => {
+      acc[url.shortUrl] = url.accesses.length;
+      return acc
+    });
+    return { urls, totalurls, urlCounts };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} url`;
+  findOne(id: string) {
+    return this.urlRepository.findOneBy({ id });
   }
 
   getUrlByShortUrl(shortUrl: string) {
@@ -48,11 +69,18 @@ export class UrlsService {
     return this.urlAccessRepository.save(newAccess);
   }
 
-  update(id: number, updateUrlDto: UpdateUrlDto) {
-    return `This action updates a #${id} url`;
+  async update(id: string, updateUrlDto: UpdateUrlDto) {
+    const user = await this.urlRepository.preload({
+      id: id,
+      ...updateUrlDto,
+    })
+    if (!user) {
+      throw new Error(`Could not find url with id ${id}`);
+    }
+    return await this.urlRepository.save(user);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} url`;
+  remove(id: string) {
+    return this.urlRepository.delete({ id });
   }
 }

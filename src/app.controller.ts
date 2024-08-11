@@ -10,8 +10,10 @@ import { User } from './users/entities/user.entity';
 
 @Controller()
 export class AppController {
-  urlService: UrlsService;
-  constructor(private readonly appService: AppService) { }
+
+  constructor(private readonly appService: AppService,
+    private readonly urlService: UrlsService
+  ) { }
 
   @UseGuards(LocalAuthGuard)
   @Public()
@@ -31,8 +33,7 @@ export class AppController {
     const url = await this.urlService.getUrlByShortUrl(shortUrl);
 
     if (url) {
-      const newAccess = this.urlService.createUrlAccess(url, req.ip, user);
-
+      await this.urlService.createUrlAccess(url, req.ip, user);
       return res.redirect(url.originalUrl);
     } else {
       return res.status(404).send('URL not found');
