@@ -1,6 +1,6 @@
 {
   "name": "authorization",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "description": "This software shortens and encodes url from users.",
   "author": "Orine",
   "private": true,

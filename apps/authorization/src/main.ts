@@ -15,7 +15,7 @@ async function bootstrap() {
   app.useGlobalFilters(new BaseExceptionFilter(configService));
 
   const config = new DocumentBuilder()
-    .setTitle('Url Shortener API')
+    .setTitle('Authorization API')
     .setDescription('Cool docs bro.')
     .setVersion('0.5')
     .build();
