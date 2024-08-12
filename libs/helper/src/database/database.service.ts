@@ -3,6 +3,7 @@ import {
   TypeOrmModuleAsyncOptions,
   TypeOrmModuleOptions,
 } from '@nestjs/typeorm';
+import { EntityClassOrSchema } from '@nestjs/typeorm/dist/interfaces/entity-class-or-schema.type';
 import { DataSource } from 'typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
@@ -10,9 +11,9 @@ import { User } from '../../../../apps/authorization/src/users/entities/user.ent
 import { UrlAccess } from '../../../../apps/url_shortener/src/entities/access.entity';
 import { Url } from '../../../../apps/url_shortener/src/entities/url.entity';
 
-export const entitiesMap: { AUTH: Function[]; shortener: Function[] } = {
+export const entitiesMap: { AUTH: EntityClassOrSchema[]; SHORTENER: EntityClassOrSchema[] } = {
   AUTH: [User, Url, UrlAccess],
-  shortener: [User, Url, UrlAccess],
+  SHORTENER: [User, Url, UrlAccess],
 };
 
 //** Database Config. This database configuration serves only to migrations, seeds and things outside the application */
