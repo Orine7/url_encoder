@@ -72,21 +72,24 @@ http://localhost:4000/api
 ```
 
 Ps.: This assumes that your docker compose file points the default project ports.
+
 ## Roadmap
 
-- Split database so that each service has its own
+- [ ] Split database so that each service has its own
 
-- Add rabbitmq for services connection
+- [ ] Add rabbitmq for services communication
 
-- Add monetization features for url clicks
+- [ ] Add monetization features for url clicks
 
-- Improve JWT auth. Needs to add refreshing tokens
+- [ ] Add ads integration
 
-- Add nginx for reverse proxing and load balancing
+- [ ] Improve JWT auth. Needs to add refreshing tokens
 
-- Upload to homelab server
+- [ ] Add nginx for reverse proxing and load balancing
 
-- Add Kubernetes orchestration
+- [ ] Upload to homelab server
 
-- Add it to personal page
+- [ ] Add Kubernetes orchestration
+
+- [ ] Add it to personal page
 
