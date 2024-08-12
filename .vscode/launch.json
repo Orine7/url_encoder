@@ -18,6 +18,23 @@
       "skipFiles": [
         "<node_internals>/**"
       ]
+    },
+    {
+      "name": "Attach to Shortener",
+      "type": "node",
+      "request": "attach",
+      "port": 9228,
+      "address": "localhost",
+      "restart": true,
+      "localRoot": "${workspaceFolder}",
+      "remoteRoot": "/usr/src",
+      "sourceMaps": true,
+      "outFiles": [
+        "${workspaceFolder}/dist/**/*.js"
+      ],
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
     }
     ]
 }
