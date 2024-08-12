@@ -8,7 +8,10 @@ import {
   Patch,
   Post,
   Query,
+  Req,
+  Res,
 } from '@nestjs/common';
+import { Request, Response } from 'express';
 import { CreateUrlDto } from './dto/create-url.dto';
 import { UpdateUrlDto } from './dto/update-url.dto';
 import { UrlShortnerService } from './url_shortner.service';
@@ -33,9 +36,28 @@ export class UrlShortnerController {
     return this.urlsService.findAll(options, user);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
+  @Public("readonly")
+  @Get('/byId/:id')
+  async getUrlById(@Param('id') id: string) {
     return this.urlsService.findOne(id);
+  }
+
+  @Public("readonly")
+  @Get('/:shortUrl')
+  async redirectUrl(
+    @Param('shortUrl') shortUrl: string,
+    @CurrentUser() user: JWTUser,
+    @Req() req: Request,
+    @Res() res: Response,
+  ) {
+    const url = await this.urlsService.getUrlByShortUrl(shortUrl);
+
+    if (url) {
+      await this.urlsService.createUrlAccess(url, req.ip, user);
+      return res.redirect(url.originalUrl);
+    } else {
+      return res.status(404).send('URL not found');
+    }
   }
 
   @Patch(':id')
