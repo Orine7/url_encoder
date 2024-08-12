@@ -1,4 +1,5 @@
-import { encryptPassword, isPassEncrypted, UserType } from '@app/helper';
+import { encryptPassword, isPassEncrypted } from '@app/helper';
+import { UserType } from '@app/helper/types/user.type';
 import {
   BeforeInsert,
   BeforeUpdate,

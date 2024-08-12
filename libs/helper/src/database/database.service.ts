@@ -6,6 +6,24 @@ import {
 import { DataSource } from 'typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
+import { User } from '../../../../apps/authorization/src/users/entities/user.entity';
+import { UrlAccess } from '../../../../apps/url_shortner/src/entities/access.entity';
+import { Url } from '../../../../apps/url_shortner/src/entities/url.entity';
+
+
+export const entitiesMap: { AUTH: Function[]; SHORTNER: Function[] } = {
+  AUTH: [
+    User,
+    Url,
+    UrlAccess,
+  ],
+  SHORTNER: [
+    User,
+    Url,
+    UrlAccess,
+  ],
+}
+
 
 //** Database Config. This database configuration serves only to migrations, seeds and things outside the application */
 const postgreConfig: PostgresConnectionOptions = {
@@ -15,7 +33,7 @@ const postgreConfig: PostgresConnectionOptions = {
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB,
   port: parseInt(process.env.DATABASE_PORT) || 5433,
-  entities: ['.**/*.entity{.ts,.js}'],
+  entities: entitiesMap[process.env.SERVICE],
   namingStrategy: new SnakeNamingStrategy(),
   synchronize: process.env.ENVIRONMENT !== 'PRODUCTION',
 };
@@ -37,7 +55,7 @@ export function connectionOptions(): TypeOrmModuleAsyncOptions {
         password: configService.get('POSTGRES_PASSWORD'),
         database: configService.get('POSTGRES_DB'),
         port: parseInt(configService.get('DATABASE_PORT')),
-        entities: ['.**/*.entity{.ts,.js}'],
+        entities: entitiesMap[configService.get('SERVICE')],
         namingStrategy: new SnakeNamingStrategy(),
         synchronize: configService.get('ENVIRONMENT') !== 'PRODUCTION',
       };

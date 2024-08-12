@@ -1,7 +1,8 @@
 FROM node:22.4-alpine
-WORKDIR /usr/src/app
 
-COPY package*.json ./
+WORKDIR /usr/src
+
+COPY  package*.json  .
 
 RUN npm install
 
@@ -11,3 +12,6 @@ RUN npm run build
 
 EXPOSE 3000
 EXPOSE 9229
+
+
+

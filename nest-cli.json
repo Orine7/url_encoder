@@ -42,7 +42,7 @@
         "tsConfigPath": "apps/authorization/tsconfig.app.json"
       }
     },
-    "urlshortner": {
+    "url_shortner": {
       "type": "application",
       "root": "apps/url_shortner",
       "entryFile": "main",

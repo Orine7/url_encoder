@@ -1,6 +1,6 @@
+import { JWTUser } from '@app/helper';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { JWTUser } from '../libs/helper/src';
 import { User } from './users/entities/user.entity';
 
 @Injectable()

@@ -1,10 +1,11 @@
+import { connectionOptions } from '@app/helper';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as Joi from 'joi';
-import { connectionOptions } from '../../../libs/helper/src';
+import { User } from './../../authorization/src/users/entities/user.entity';
 import { UrlAccess } from './entities/access.entity';
 import { Url } from './entities/url.entity';
 import { UrlShortnerController } from './url_shortner.controller';
@@ -38,7 +39,7 @@ import { UrlShortnerService } from './url_shortner.service';
       }),
       inject: [ConfigService],
     }),
-    TypeOrmModule.forFeature([Url, UrlAccess])
+    TypeOrmModule.forFeature([User, Url, UrlAccess])
   ],
   controllers: [UrlShortnerController],
   providers: [UrlShortnerService],
