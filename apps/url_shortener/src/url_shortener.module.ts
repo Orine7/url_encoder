@@ -5,11 +5,11 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as Joi from 'joi';
-import { User } from './../../authorization/src/users/entities/user.entity';
+import { User } from '../../authorization/src/users/entities/user.entity';
 import { UrlAccess } from './entities/access.entity';
 import { Url } from './entities/url.entity';
-import { UrlShortnerController } from './url_shortner.controller';
-import { UrlShortnerService } from './url_shortner.service';
+import { UrlShortenerController } from './url_shortener.controller';
+import { UrlShortenerService } from './url_shortener.service';
 
 @Module({
   imports: [
@@ -41,7 +41,7 @@ import { UrlShortnerService } from './url_shortner.service';
     }),
     TypeOrmModule.forFeature([User, Url, UrlAccess])
   ],
-  controllers: [UrlShortnerController],
-  providers: [UrlShortnerService],
+  controllers: [UrlShortenerController],
+  providers: [UrlShortenerService],
 })
-export class UrlShortnerModule { }
+export class UrlShortenerModule { }

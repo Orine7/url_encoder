@@ -7,17 +7,17 @@ import { DataSource } from 'typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 import { User } from '../../../../apps/authorization/src/users/entities/user.entity';
-import { UrlAccess } from '../../../../apps/url_shortner/src/entities/access.entity';
-import { Url } from '../../../../apps/url_shortner/src/entities/url.entity';
+import { UrlAccess } from '../../../../apps/url_shortener/src/entities/access.entity';
+import { Url } from '../../../../apps/url_shortener/src/entities/url.entity';
 
 
-export const entitiesMap: { AUTH: Function[]; SHORTNER: Function[] } = {
+export const entitiesMap: { AUTH: Function[]; shortener: Function[] } = {
   AUTH: [
     User,
     Url,
     UrlAccess,
   ],
-  SHORTNER: [
+  shortener: [
     User,
     Url,
     UrlAccess,

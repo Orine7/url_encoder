@@ -14,12 +14,12 @@ import {
 import { Request, Response } from 'express';
 import { CreateUrlDto } from './dto/create-url.dto';
 import { UpdateUrlDto } from './dto/update-url.dto';
-import { UrlShortnerService } from './url_shortner.service';
+import { UrlShortenerService } from './url_shortener.service';
 
 
 @Controller()
-export class UrlShortnerController {
-  constructor(private readonly urlsService: UrlShortnerService) { }
+export class UrlShortenerController {
+  constructor(private readonly urlsService: UrlShortenerService) { }
 
   @Public("readonly")
   @Post()
@@ -33,7 +33,7 @@ export class UrlShortnerController {
     @Query() options: pageOptions,
     @CurrentUser() user?: JWTUser
   ) {
-    return this.urlsService.findAll(options, user);
+    return this.urlsService.findAll(new pageOptions(options), user);
   }
 
   @Public("readonly")

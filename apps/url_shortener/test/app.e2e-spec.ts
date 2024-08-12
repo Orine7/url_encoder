@@ -1,14 +1,14 @@
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
-import { UrlshortnerModule } from '../src/url_shortner.module';
+import { UrlshortenerModule } from '../src/url_shortener.module';
 
-describe('UrlshortnerController (e2e)', () => {
+describe('UrlshortenerController (e2e)', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [UrlshortnerModule],
+      imports: [UrlshortenerModule],
     }).compile();
 
     app = moduleFixture.createNestApplication();

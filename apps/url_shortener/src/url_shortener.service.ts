@@ -11,7 +11,7 @@ import { Url } from './entities/url.entity';
 
 
 @Injectable()
-export class UrlShortnerService {
+export class UrlShortenerService {
 
   constructor(
     @InjectRepository(User)
@@ -50,7 +50,7 @@ export class UrlShortnerService {
     const urlCounts = urls.reduce((acc, url) => {
       acc[url.shortUrl] = url.accesses.length;
       return acc
-    });
+    }, {});
     return { urls, totalurls, urlCounts };
   }
 

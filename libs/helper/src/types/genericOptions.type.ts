@@ -1,3 +1,4 @@
+
 import { Type } from "class-transformer";
 import { IsEnum, IsInt, IsOptional, Max, Min } from "class-validator";
 
@@ -10,14 +11,14 @@ export class pageOptions {
     //** Order of the results, generally used on createdAt. */
     @IsEnum(OrderEnum)
     @IsOptional()
-    order?: OrderEnum = OrderEnum.ASC;
+    order?: OrderEnum
 
     //** Page number. */
     @Type(() => Number)
     @IsInt()
     @Min(0)
     @IsOptional()
-    page?: number = 0;
+    page?: number
 
     //** Number of results per page. */
     @Type(() => Number)
@@ -25,5 +26,14 @@ export class pageOptions {
     @Min(1)
     @Max(50)
     @IsOptional()
-    size?: number = 50;
+    size?: number
+
+    constructor(options?: pageOptions) {
+        const defaultOptions: pageOptions = {
+            order: OrderEnum.DESC,
+            page: 0,
+            size: 50
+        }
+        Object.assign(this, defaultOptions, options);
+    }
 }
