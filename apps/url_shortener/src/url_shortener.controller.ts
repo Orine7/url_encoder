@@ -16,33 +16,29 @@ import { CreateUrlDto } from './dto/create-url.dto';
 import { UpdateUrlDto } from './dto/update-url.dto';
 import { UrlShortenerService } from './url_shortener.service';
 
-
 @Controller()
 export class UrlShortenerController {
-  constructor(private readonly urlsService: UrlShortenerService) { }
+  constructor(private readonly urlsService: UrlShortenerService) {}
 
-  @Public("readonly")
+  @Public('readonly')
   @Post()
   create(@Body() createUrlDto: CreateUrlDto, @CurrentUser() user: JWTUser) {
     return this.urlsService.create(createUrlDto, user);
   }
 
-  @Public("readonly")
+  @Public('readonly')
   @Get()
-  findAll(
-    @Query() options: pageOptions,
-    @CurrentUser() user?: JWTUser
-  ) {
+  findAll(@Query() options: pageOptions, @CurrentUser() user?: JWTUser) {
     return this.urlsService.findAll(new pageOptions(options), user);
   }
 
-  @Public("readonly")
+  @Public('readonly')
   @Get('/byId/:id')
   async getUrlById(@Param('id') id: string) {
     return this.urlsService.findOne(id);
   }
 
-  @Public("readonly")
+  @Public('readonly')
   @Get('/:shortUrl')
   async redirectUrl(
     @Param('shortUrl') shortUrl: string,

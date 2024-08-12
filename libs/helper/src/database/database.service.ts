@@ -10,20 +10,10 @@ import { User } from '../../../../apps/authorization/src/users/entities/user.ent
 import { UrlAccess } from '../../../../apps/url_shortener/src/entities/access.entity';
 import { Url } from '../../../../apps/url_shortener/src/entities/url.entity';
 
-
 export const entitiesMap: { AUTH: Function[]; shortener: Function[] } = {
-  AUTH: [
-    User,
-    Url,
-    UrlAccess,
-  ],
-  shortener: [
-    User,
-    Url,
-    UrlAccess,
-  ],
-}
-
+  AUTH: [User, Url, UrlAccess],
+  shortener: [User, Url, UrlAccess],
+};
 
 //** Database Config. This database configuration serves only to migrations, seeds and things outside the application */
 const postgreConfig: PostgresConnectionOptions = {

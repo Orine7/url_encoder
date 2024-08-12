@@ -34,18 +34,23 @@ import { UsersModule } from './users/users.module';
     JwtModule.registerAsync({
       useFactory: (configService: ConfigService) => ({
         global: true,
-        secret: configService.get<string>("JWT_SECRET"),
+        secret: configService.get<string>('JWT_SECRET'),
         signOptions: {
           expiresIn: `60m`,
         },
       }),
       inject: [ConfigService],
-    })
+    }),
   ],
   controllers: [AppController],
-  providers: [AppService, LocalStrategy, JwtStrategy, {
-    provide: APP_GUARD,
-    useClass: JwtAuthGuard,
-  },],
+  providers: [
+    AppService,
+    LocalStrategy,
+    JwtStrategy,
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
+  ],
 })
-export class AppModule { }
+export class AppModule {}

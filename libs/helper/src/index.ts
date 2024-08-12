@@ -15,4 +15,3 @@ export * from './types/user.type';
 // Decorators
 export * from './decorators/currentUser.decorator';
 export * from './decorators/public.decorator';
-

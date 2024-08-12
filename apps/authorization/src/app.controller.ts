@@ -8,9 +8,7 @@ import { User } from './users/entities/user.entity';
 
 @Controller()
 export class AppController {
-
-  constructor(private readonly appService: AppService,
-  ) { }
+  constructor(private readonly appService: AppService) {}
 
   @UseGuards(LocalAuthGuard)
   @Public()
@@ -18,6 +16,4 @@ export class AppController {
   login(@CurrentUser() user: User) {
     return this.appService.login(user);
   }
-
-
 }

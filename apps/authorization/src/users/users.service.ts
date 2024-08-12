@@ -13,7 +13,7 @@ export class UsersService {
     private readonly usersRepository: Repository<User>,
   ) { }
   async create(createUserDto: CreateUserDto) {
-    const newUser = this.usersRepository.create(createUserDto)
+    const newUser = this.usersRepository.create(createUserDto);
     const { password, ...created } = await this.usersRepository.save(newUser);
     return created;
   }
@@ -23,20 +23,20 @@ export class UsersService {
   }
 
   async findOne(id: string) {
-    return await this.usersRepository.findOneByOrFail({ id })
+    return await this.usersRepository.findOneByOrFail({ id });
   }
 
   async validateUser(email: string, password: string) {
     const user = await this.usersRepository.findOne({
       where: { email },
-      select: ["id", "email", "password", "type",],
+      select: ['id', 'email', 'password', 'type'],
     });
     if (!password || !user) {
-      throw new UnauthorizedException("Invalid credentials");
+      throw new UnauthorizedException('Invalid credentials');
     }
     const passwordIsValid = validatePassword(password, user.password);
     if (!passwordIsValid) {
-      throw new UnauthorizedException("Invalid credentials");
+      throw new UnauthorizedException('Invalid credentials');
     }
     return user;
   }
@@ -45,7 +45,7 @@ export class UsersService {
     const user = await this.usersRepository.preload({
       id: id,
       ...updateUserDto,
-    })
+    });
     if (!user) {
       throw new Error(`User with id ${id} not found`);
     }

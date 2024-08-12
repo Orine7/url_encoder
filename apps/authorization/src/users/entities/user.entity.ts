@@ -53,5 +53,4 @@ export class User {
       this.password = encryptPassword(this.password);
     }
   }
-
 }

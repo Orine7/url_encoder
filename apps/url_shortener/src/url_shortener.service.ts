@@ -8,11 +8,8 @@ import { UpdateUrlDto } from './dto/update-url.dto';
 import { UrlAccess } from './entities/access.entity';
 import { Url } from './entities/url.entity';
 
-
-
 @Injectable()
 export class UrlShortenerService {
-
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
@@ -20,11 +17,13 @@ export class UrlShortenerService {
     private readonly urlRepository: Repository<Url>,
     @InjectRepository(UrlAccess)
     private readonly urlAccessRepository: Repository<UrlAccess>,
-  ) { }
+  ) {}
   async create(createUrlDto: CreateUrlDto, currentUser?: JWTUser) {
     const newUrl = this.urlRepository.create({
       ...createUrlDto,
-      creator: currentUser ? await this.userRepository.findOneBy({ id: currentUser.id }) : undefined,
+      creator: currentUser
+        ? await this.userRepository.findOneBy({ id: currentUser.id })
+        : undefined,
       shortUrl: Math.random().toString(36).substring(2, 8),
     });
     return await this.urlRepository.save(newUrl);
@@ -35,21 +34,22 @@ export class UrlShortenerService {
       where: [
         { isPublic: true, deletedAt: null },
         {
-          creator: currentUser ? { id: currentUser.id } : undefined
-        }],
+          creator: currentUser ? { id: currentUser.id } : undefined,
+        },
+      ],
       relations: {
         accesses: true,
-        creator: true
+        creator: true,
       },
       order: {
-        createdAt: options.order
+        createdAt: options.order,
       },
       take: options.size,
-      skip: options.page * options.size
+      skip: options.page * options.size,
     });
     const urlCounts = urls.reduce((acc, url) => {
       acc[url.shortUrl] = url.accesses.length;
-      return acc
+      return acc;
     }, {});
     return { urls, totalurls, urlCounts };
   }
@@ -65,8 +65,10 @@ export class UrlShortenerService {
     const newAccess = this.urlAccessRepository.create({
       url,
       ipAddress: ip,
-      user: currentUser ? await this.userRepository.findOneBy({ id: currentUser.id }) : undefined,
-    })
+      user: currentUser
+        ? await this.userRepository.findOneBy({ id: currentUser.id })
+        : undefined,
+    });
     return this.urlAccessRepository.save(newAccess);
   }
 
@@ -74,7 +76,7 @@ export class UrlShortenerService {
     const user = await this.urlRepository.preload({
       id: id,
       ...updateUrlDto,
-    })
+    });
     if (!user) {
       throw new Error(`Could not find url with id ${id}`);
     }

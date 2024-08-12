@@ -5,7 +5,7 @@ import { User } from './users/entities/user.entity';
 
 @Injectable()
 export class AppService {
-  constructor(private readonly jwtService: JwtService) { }
+  constructor(private readonly jwtService: JwtService) {}
   getHello(): string {
     return 'Hello World!';
   }
@@ -14,8 +14,8 @@ export class AppService {
       id: user.id,
       email: user.email,
       type: user.type,
-      name: user.name
-    }
+      name: user.name,
+    };
     return {
       access_token: this.jwtService.sign(payload),
     };

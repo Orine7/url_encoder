@@ -13,7 +13,6 @@ import { UrlShortenerService } from './url_shortener.service';
 
 @Module({
   imports: [
-
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: Joi.object({
@@ -32,16 +31,16 @@ import { UrlShortenerService } from './url_shortener.service';
     JwtModule.registerAsync({
       useFactory: (configService: ConfigService) => ({
         global: true,
-        secret: configService.get<string>("JWT_SECRET"),
+        secret: configService.get<string>('JWT_SECRET'),
         signOptions: {
           expiresIn: `60m`,
         },
       }),
       inject: [ConfigService],
     }),
-    TypeOrmModule.forFeature([User, Url, UrlAccess])
+    TypeOrmModule.forFeature([User, Url, UrlAccess]),
   ],
   controllers: [UrlShortenerController],
   providers: [UrlShortenerService],
 })
-export class UrlShortenerModule { }
+export class UrlShortenerModule {}
